@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+    <h1 class="mb-4">Hello, {{ current_user.username }}</h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.picture.label() }}
+            {{ form.picture(class="form-control-file") }}
+            {% if form.picture.errors %}
+                {% for error in form.picture.errors %}
+                    <span class="text-danger">{{ error }}</span></div><br>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info")}}
+        </div>
+    </form>
+
+    {% for image_file in image_files %}
+    <img src="{{ url_for('static', filename='images/') + image_file }}" alt="" srcset="" class="feed-image">
+    {% endfor %}
+
+    {% else %}
+    <h1>Speak friend and enter.</h1>
+    {% endif %}
+{% endblock content %}
