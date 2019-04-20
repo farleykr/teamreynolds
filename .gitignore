@@ -3,3 +3,5 @@ venv/
 .vscode
 
 teamreynolds/__pycache__
+
+teamreynolds/*.db
